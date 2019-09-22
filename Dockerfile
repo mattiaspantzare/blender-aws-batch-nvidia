@@ -5,9 +5,11 @@ ENV BLENDER_MAJOR 2.80
 ENV BLENDER_VERSION 2.80
 ENV BLENDER_BZ2_URL http://ftp.nluug.nl/pub/graphics/blender/release/Blender${BLENDER_MAJOR}/blender-${BLENDER_VERSION}-linux-glibc217-x86_64.tar.bz2
 
+ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && \
 	apt-get install -y \
 		curl wget nano \
+		awscli \
 		bzip2 libfreetype6 libgl1-mesa-dev \
 		libglu1-mesa \
 		libxi6 libxrender1 && \

@@ -26,7 +26,7 @@ echo "jobQueue: $AWS_BATCH_JQ_NAME"
 echo "computeEnvironment: $AWS_BATCH_CE_NAME"
 
 # Copy target blender file from s3
-#aws s3 cp $BLENDER_S3_URL .
+aws s3 sync $BLENDER_S3_URL .
 
 mkdir frames
 
@@ -35,7 +35,7 @@ mkdir frames
 # render frames from parameters $1 to $2 and copy into s3
 while [ $COUNTER -le $2 ]; do
         /usr/local/blender/blender --enable-autoexec -b *.blend -o frames/ -F PNG -E CYCLES -f $COUNTER
-#        aws s3 cp frames/  $FRAME_S3_URL --recursive
-#        rm frames/*
+        aws s3 cp frames/  $FRAME_S3_URL --recursive
+        rm frames/*
         let COUNTER=COUNTER+1
 done
